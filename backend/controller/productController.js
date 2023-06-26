@@ -1,6 +1,7 @@
 const Product=require("../model/product")
 const catchAsync=require("../util/catchAsync")
 const AppError=require("../util/appError")
+const APIFeatures=require("../util/apiFeature")
 
 // Create Product Admin
 
@@ -20,7 +21,10 @@ const createProduct= catchAsync(async(req,res,next)=>{
 //get All Product
 const getAllProduct=catchAsync(async(req,res,next)=>{
 
-    const product=await Product.find()
+   
+    const features= new APIFeatures(Product.find(),req.query).sort().filter().sort().LimitFields().Pagination()
+    const product=await features.query
+   
 
     res.status(200).json({
         status:"success",

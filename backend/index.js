@@ -1,10 +1,11 @@
 const express=require('express')
 require('dotenv').config()
 const connection=require("./db")
-
+const productRouter=require("./routes/product.routes")
 const app=express()
+app.use(express.json())
 
-
+app.use("/product",productRouter)
 app.listen(process.env.port,async()=>{
     try{
         await connection

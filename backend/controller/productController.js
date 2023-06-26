@@ -45,35 +45,29 @@ const getProductDetails=catchAsync(async(req,res,next)=>{
     })
 
 })
-const updateProduct=async(req,res,next)=>{
+const updateProduct=catchAsync(async(req,res,next)=>{
 
     const ID=req.params.id;
     const payload=req.body
-    console.log(payload)
+    
     
     const product= await Product.findByIdAndUpdate({_id:ID},payload)
 
     if(!product){
-        return res.status(404).json({
-            status:"fail",
-            message:"no product found at that id"
-        })
+        return next(new AppError("Product not found with this id",404))
     }
 
     res.status(200).json({
         status:"success",
-        product
+        message:"updated"
     })
+})
 
-
-
-}
-
-const deleteProduct=async(req,res,next)=>{
+const deleteProduct=catchAsync(async(req,res,next)=>{
 
     const Id=req.params.id
     await Product.findByIdAndDelete({_id:Id})
     res.status(200).send("deleted")
-}
+})
 //Update product Admin
 module.exports={createProduct,getAllProduct,updateProduct,deleteProduct,getProductDetails}

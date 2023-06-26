@@ -1,8 +1,10 @@
 const Product=require("../model/product")
+const catchAsync=require("../util/catchAsync")
+const AppError=require("../util/appError")
 
 // Create Product Admin
 
-const createProduct= async(req,res,next)=>{
+const createProduct= catchAsync(async(req,res,next)=>{
    
     const product=await Product.create(req.body);
 
@@ -13,9 +15,10 @@ const createProduct= async(req,res,next)=>{
    
 
 }
+)
 
 //get All Product
-const getAllProduct=async(req,res,next)=>{
+const getAllProduct=catchAsync(async(req,res,next)=>{
 
     const product=await Product.find()
 
@@ -24,18 +27,16 @@ const getAllProduct=async(req,res,next)=>{
         product
     })
 
-}
+})
 
-const getProductDetails=async(req,res,next)=>{
-    const Id=req.params.id
+const getProductDetails=catchAsync(async(req,res,next)=>{
+    
 
-    const product=Product.findById({_id:Id})
-
-    if(!product){
-        return res.status(404).json({
-            staus:"failed",
-            message:"no product found with that id"
-        })
+    const product= await Product.findById(req.params.id)
+  console.log(product)
+  if(!product){
+    console.log("aky")
+        return (next(new AppError("No product found with this tour id",404)))
     }
 
     res.status(200).json({
@@ -43,7 +44,7 @@ const getProductDetails=async(req,res,next)=>{
         product
     })
 
-}
+})
 const updateProduct=async(req,res,next)=>{
 
     const ID=req.params.id;

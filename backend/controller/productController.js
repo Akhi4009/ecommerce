@@ -26,6 +26,24 @@ const getAllProduct=async(req,res,next)=>{
 
 }
 
+const getProductDetails=async(req,res,next)=>{
+    const Id=req.params.id
+
+    const product=Product.findById({_id:Id})
+
+    if(!product){
+        return res.status(404).json({
+            staus:"failed",
+            message:"no product found with that id"
+        })
+    }
+
+    res.status(200).json({
+        staus:"success",
+        product
+    })
+
+}
 const updateProduct=async(req,res,next)=>{
 
     const ID=req.params.id;
@@ -57,4 +75,4 @@ const deleteProduct=async(req,res,next)=>{
     res.status(200).send("deleted")
 }
 //Update product Admin
-module.exports={createProduct,getAllProduct,updateProduct,deleteProduct}
+module.exports={createProduct,getAllProduct,updateProduct,deleteProduct,getProductDetails}

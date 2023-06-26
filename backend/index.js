@@ -10,8 +10,12 @@ const globalErrorHandler=require("./midlleware/error")
 const app=express()
 app.use(express.json())
 
+//router
 app.use("/product",productRouter)
-app.use("/user",userRouter)
+app.use("/users",userRouter)
+
+// error
+
 app.all('*',(req,res,next)=>{
     next(new AppError(`Can't find ${req.originalUrl} on this server`,404))
 

@@ -28,9 +28,11 @@ const getAllProduct=async(req,res,next)=>{
 
 const updateProduct=async(req,res,next)=>{
 
-    const id=req.params.id;
+    const ID=req.params.id;
     const payload=req.body
-    const product=Product.findById({_id:id},payload)
+    console.log(payload)
+    
+    const product= await Product.findByIdAndUpdate({_id:ID},payload)
 
     if(!product){
         return res.status(404).json({
@@ -45,7 +47,14 @@ const updateProduct=async(req,res,next)=>{
     })
 
 
+
 }
 
+const deleteProduct=async(req,res,next)=>{
+
+    const Id=req.params.id
+    await Product.findByIdAndDelete({_id:Id})
+    res.status(200).send("deleted")
+}
 //Update product Admin
-module.exports={createProduct,getAllProduct,updateProduct}
+module.exports={createProduct,getAllProduct,updateProduct,deleteProduct}

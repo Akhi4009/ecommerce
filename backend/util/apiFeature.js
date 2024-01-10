@@ -7,7 +7,7 @@ class APIFeatures{
 
 
     Search(){
-        const keyword=this.queryString=this.queryString.keyword
+        const keyword = this.queryString.keyword
         ?{
             name:{
                 $regex: this.queryString.keyword,

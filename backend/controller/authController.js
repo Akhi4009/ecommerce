@@ -10,7 +10,7 @@ const catchAsync=require("../util/catchAsync")
 
 const signToken= id =>{
    
-    console.log(process.env.jwt_secret)
+    // console.log(process.env.jwt_secret)
     return jwt.sign({id},process.env.jwt_secret,{
         expiresIn:process.env.jwt_expires
     })

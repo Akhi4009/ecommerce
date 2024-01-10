@@ -4,8 +4,6 @@ const bcrypt=require("bcrypt")
 const crypto=require("crypto")
 
 const userSchema= mongoose.Schema({
-
-
     name:{type:String,required:true},
     email:{type:String,
         required:true,
@@ -15,7 +13,7 @@ const userSchema= mongoose.Schema({
     photo:String,
     role:{
         type:String,
-       enum:['user', 'guide', 'lead-guide', 'admin'],
+       enum:['user','admin'],
        default:"user"
     
     },

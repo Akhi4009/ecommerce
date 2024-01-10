@@ -1,7 +1,7 @@
 const Product=require("../model/product")
 const catchAsync=require("../util/catchAsync")
 const AppError=require("../util/appError")
-const APIFeatures=require("../util/apiFeature")
+const APIFeatures=require("../util/apiFeature");
 
 // Create Product Admin
 
@@ -34,13 +34,10 @@ const getAllProduct=catchAsync(async(req,res,next)=>{
 })
 
 const getProductDetails=catchAsync(async(req,res,next)=>{
-    
 
     const product= await Product.findById(req.params.id)
-  console.log(product)
-  if(!product){
-    console.log("aky")
-        return (next(new AppError("No product found with this tour id",404)))
+    if(!product){
+        return (next(new AppError("No product found with this  id",404)))
     }
 
     res.status(200).json({

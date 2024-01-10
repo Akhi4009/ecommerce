@@ -36,7 +36,7 @@ category:{
 },
 stock:{
 type:Number,
-required:[true,'Please enter product stack'],
+required:[true,'Please enter product stock'],
 default:1
 },
 numOfReviews:{

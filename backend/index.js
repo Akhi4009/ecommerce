@@ -5,8 +5,10 @@ const connection=require("./db")
 //router
 const productRouter=require("./routes/product.routes")
 const userRouter=require("./routes/user.routes")
+// Error
 const AppError=require("./util/appError")
 const globalErrorHandler=require("./midlleware/error")
+
 const app=express()
 app.use(express.json())
 
